@@ -1,3 +1,3 @@
-module github.com/benkrig/active-campaign-sdk-go
+module github.com/chrisjoyce911/active-campaign-sdk-go
 
 go 1.14
