@@ -21,30 +21,25 @@ type CreateTagRequest struct {
 	Tag *Tag `json:"tag"`
 }
 
-// Links is embedded in the CreatedTag struct.
-type Links struct {
+// TagLinks is embedded in the CreatedTag struct.
+type TagLinks struct {
 	ContactGoalTags string `json:"contactGoalTags"`
 }
 
 // CreatedTag is a struct embedded in the response for creating or retrieving a tag.
 type CreatedTag struct {
-	Tag             string `json:"tag"`
-	Description     string `json:"description"`
-	TagType         string `json:"tagType"`
-	SubscriberCount string `json:"subscriber_count"`
-	Cdate           string `json:"cdate"`
-	Links           *Links `json:"links"`
-	ID              string `json:"id"`
+	Tag             string    `json:"tag"`
+	Description     string    `json:"description"`
+	TagType         string    `json:"tagType"`
+	SubscriberCount string    `json:"subscriber_count"`
+	Cdate           string    `json:"cdate"`
+	Links           *TagLinks `json:"links"`
+	ID              string    `json:"id"`
 }
 
 // TagResponse is the response body returned from creating or retrieving a tag.
 type TagResponse struct {
 	Tag *CreatedTag `json:"tag"`
-}
-
-// Meta is embedded in the ListAllResponse struct.
-type Meta struct {
-	Total string `json:"total"`
 }
 
 // ListAllResponse is the response body returned from listing all tags.

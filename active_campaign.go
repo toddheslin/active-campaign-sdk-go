@@ -36,8 +36,10 @@ type Client struct {
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// Services used for talking to different parts of the Active Campaign API.
-	Contacts *ContactsService
-	Tags     *TagsService
+	Contacts     *ContactsService
+	Tags         *TagsService
+	CustomFields *CustomFieldsService
+	Lists        *ListsService
 }
 
 type service struct {
@@ -49,6 +51,17 @@ type ClientOpts struct {
 	HttpClient httpClient
 	BaseUrl    string
 	Token      string
+}
+
+// Meta is embedded in the Response struct.
+type Meta struct {
+	Total string `json:"total"`
+}
+
+// Links is embedded in the Response struct.
+type Links struct {
+	Options   string `json:"options"`
+	Relations string `json:"relations"`
 }
 
 // NewClient returns a new Active Campaign API client. httpClient is provided to allow a
@@ -81,6 +94,9 @@ func NewClient(opts *ClientOpts) (*Client, error) {
 	c.common.client = c
 	c.Contacts = (*ContactsService)(&c.common)
 	c.Tags = (*TagsService)(&c.common)
+	c.CustomFields = (*CustomFieldsService)(&c.common)
+	c.Lists = (*ListsService)(&c.common)
+
 	return c, nil
 }
 

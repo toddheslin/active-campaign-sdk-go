@@ -61,7 +61,7 @@ func TestTagService_Create(t *testing.T) {
 			TagType:     "contact",
 			Description: "Description",
 			Cdate:       "2020-03-27T13:09:10-05:00",
-			Links:       &Links{ContactGoalTags: "https://:account.api-us1.com/api/:version/tags/1/contactGoalTags"},
+			Links:       &TagLinks{ContactGoalTags: "https://:account.api-us1.com/api/:version/tags/1/contactGoalTags"},
 			ID:          "1",
 		}}
 	if !reflect.DeepEqual(tag, want) {
@@ -118,7 +118,7 @@ func TestTagService_Create_EmptyTag(t *testing.T) {
 			Description: "",
 			TagType:     "",
 			Cdate:       "2020-03-27T13:09:10-05:00",
-			Links:       &Links{ContactGoalTags: "https://:account.api-us1.com/api/:version/tags/1/contactGoalTags"},
+			Links:       &TagLinks{ContactGoalTags: "https://:account.api-us1.com/api/:version/tags/1/contactGoalTags"},
 			ID:          "1",
 		}}
 	if !reflect.DeepEqual(tag, want) {
