@@ -1,3 +1,3 @@
 module github.com/chrisjoyce911/active-campaign-sdk-go
 
-go 1.18
+go 1.19
