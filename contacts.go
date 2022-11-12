@@ -21,12 +21,18 @@ type CreateContactRequest struct {
 	Contact *Contact `json:"contact"`
 }
 
+type FieldValues struct {
+	Field string      `json:"field"`
+	Value interface{} `json:"value"`
+}
+
 type CreatedContact struct {
-	Email string `json:"email"`
-	Cdate string `json:"cdate"`
-	Udate string `json:"udate"`
-	Orgid string `json:"orgid"`
-	Links struct {
+	Email       string        `json:"email"`
+	Cdate       string        `json:"cdate"`
+	Udate       string        `json:"udate"`
+	Orgid       string        `json:"orgid"`
+	FieldValues []FieldValues `json:"fieldValues"`
+	Links       struct {
 		BounceLogs         string `json:"bounceLogs"`
 		ContactAutomations string `json:"contactAutomations"`
 		ContactData        string `json:"contactData"`
