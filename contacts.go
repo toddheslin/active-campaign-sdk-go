@@ -11,10 +11,11 @@ import (
 type ContactsService service
 
 type Contact struct {
-	Email     string `json:"email"`
-	FirstName string `json:"firstName,omitempty"`
-	LastName  string `json:"lastName,omitempty"`
-	Phone     string `json:"phone,omitempty"`
+	Email       string        `json:"email"`
+	FirstName   string        `json:"firstName,omitempty"`
+	LastName    string        `json:"lastName,omitempty"`
+	Phone       string        `json:"phone,omitempty"`
+	FieldValues []FieldValues `json:"fieldValues,omitempty"`
 }
 
 type CreateContactRequest struct {

@@ -3,7 +3,7 @@ package active_campaign
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"reflect"
 	"testing"
@@ -298,7 +298,7 @@ func TestContactService_AddTagToContact_contactNotFound(t *testing.T) {
 	}
 	defer resp.Body.Close()
 
-	body, _ := ioutil.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	bodyString := string(body)
 
 	want := `{"message": "Contact not found"}`
