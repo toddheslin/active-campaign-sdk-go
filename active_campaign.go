@@ -64,6 +64,21 @@ type Links struct {
 	Relations string `json:"relations"`
 }
 
+type ErrorResponse struct {
+	Response interface{}
+}
+
+// InvalidError Response struct 'The request could not be processed, usually due to a missing or invalid parameter.'
+type InvalidError struct {
+	Title  string `json:"title"`
+	Detail string `json:"detail"`
+	Code   string `json:"code"`
+	Error  string `json:"error"`
+	Source struct {
+		Pointer string `json:"pointer"`
+	} `json:"source"`
+}
+
 // NewClient returns a new Active Campaign API client. httpClient is provided to allow a
 // custom client in specialized cases.
 // If a nil httpClient is provided, a new http.DefaultClient will be used.
@@ -188,10 +203,30 @@ func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 // A response is considered an error if it has a status code outside the 200 range.
 // The caller is responsible to analyze the response body.
 func CheckResponse(r *http.Response) error {
+
 	if c := r.StatusCode; 200 <= c && c <= 299 {
 		return nil
 	}
 
-	err := fmt.Errorf("Request failed. Please analyze the request body for more details. Status code: %d", r.StatusCode)
+	err := fmt.Errorf("request failed. Please analyze the request body for more details. Status code: %d", r.StatusCode)
 	return err
+}
+
+// CheckResponse checks the API response for errors, and returns them if present.
+// A response is considered an error if it has a status code outside the 200 range.
+// The caller is responsible to analyze the response body.
+func DecodeError(r *http.Response) ErrorResponse {
+
+	decErr := &InvalidError{}
+
+	if r.StatusCode == 422 {
+
+		json.NewDecoder(r.Body).Decode(decErr)
+
+	}
+
+	return ErrorResponse{
+		Response: decErr,
+	}
+
 }

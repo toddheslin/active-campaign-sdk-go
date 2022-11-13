@@ -2,7 +2,7 @@ package active_campaign
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -107,7 +107,7 @@ func TestNewRequest(t *testing.T) {
 	}
 
 	// test that body was JSON encoded
-	body, _ := ioutil.ReadAll(req.Body)
+	body, _ := io.ReadAll(req.Body)
 	if got, want := string(body), outBody; got != want {
 		t.Errorf("NewRequest(%v) Body is %v, want %v", inBody, got, want)
 	}
@@ -219,10 +219,6 @@ func TestClient_Do_HTTPResponse(t *testing.T) {
 	c, mux, _, teardown := setup()
 	defer teardown()
 
-	type foo struct {
-		A string
-	}
-
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if m := "GET"; m != r.Method {
 			t.Errorf("Request method = %v, want %v", r.Method, m)
@@ -232,7 +228,7 @@ func TestClient_Do_HTTPResponse(t *testing.T) {
 
 	req, _ := c.NewRequest("GET", "/", nil)
 	res, _ := c.Do(req, nil)
-	_, err := ioutil.ReadAll(res.Body)
+	_, err := io.ReadAll(res.Body)
 
 	if err != nil {
 		t.Errorf("Error on parsing HTTP Response = %v", err.Error())
