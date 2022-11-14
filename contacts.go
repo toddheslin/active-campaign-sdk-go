@@ -1,6 +1,7 @@
 package active_campaign
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -233,6 +234,28 @@ func (s *ContactsService) AddTagToContact(contact *AddTagToContactRequest) (*Add
 	}
 
 	c := &AddTagToContactResponse{}
+	resp, err := s.client.Do(req, c)
+	if err != nil {
+		return nil, resp, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	return c, resp, nil
+}
+
+type ContactSearchResponse struct {
+	Contact []*CreatedContact `json:"contacts"`
+}
+
+// Search Conact by email.
+func (s *ContactsService) SearchEmail(email string) (*ContactSearchResponse, *Response, error) {
+	u := fmt.Sprintf("contacts?email=%s", email)
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	c := &ContactSearchResponse{}
 	resp, err := s.client.Do(req, c)
 	if err != nil {
 		return nil, resp, err
