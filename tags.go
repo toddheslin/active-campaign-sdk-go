@@ -1,6 +1,9 @@
 package active_campaign
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // TagsService handles communication with tag related
 // methods of the Active Campaign API.
@@ -87,6 +90,24 @@ func (s *TagsService) Retrieve(id string) (*TagResponse, *Response, error) {
 // Lists all tags.
 func (s *TagsService) ListAll() (*ListAllResponse, *Response, error) {
 	u := "tags"
+	req, err := s.client.NewRequest(http.MethodGet, u, nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	c := &ListAllResponse{}
+	resp, err := s.client.Do(req, c)
+	if err != nil {
+		return nil, resp, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	return c, resp, nil
+}
+
+// Search for tags.
+func (s *TagsService) Search(search string) (*ListAllResponse, *Response, error) {
+	u := fmt.Sprintf("tags?search=%s", search)
 	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
