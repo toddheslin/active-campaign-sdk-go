@@ -27,9 +27,9 @@ type AddTagToContactResponse struct {
 	ContactTag *ContactTag `json:"contactTag"`
 }
 
-// GetContactTagResponse is the response body from getting contact tags.
+// GetContactTagResponse is the response body from getting contact tags
 type GetContactTagResponse struct {
-	ContactTag *[]ContactTag `json:"contactTags"`
+	ContactTag []*ContactTag `json:"contactTags"`
 }
 
 // AddTagToContact adds a tag to a contact.
