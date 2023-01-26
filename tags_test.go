@@ -270,7 +270,7 @@ func TestTagService_ListAll(t *testing.T) {
 				}
 			}`)
 	})
-	tags, _, err := c.Tags.ListAll()
+	tags, _, err := c.Tags.ListAll(2)
 	if err != nil {
 		t.Errorf("Tags.ListAll returned error: %v", err)
 	}
@@ -295,7 +295,7 @@ func TestTagService_ListAll_DoError(t *testing.T) {
 		w.WriteHeader(http.StatusBadRequest)
 	})
 
-	_, resp, err := c.Tags.ListAll()
+	_, resp, err := c.Tags.ListAll(2)
 	if err == nil {
 		t.Errorf("Expected error. Error is nil")
 	}

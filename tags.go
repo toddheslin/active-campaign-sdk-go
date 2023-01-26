@@ -88,8 +88,8 @@ func (s *TagsService) Retrieve(id string) (*TagResponse, *Response, error) {
 }
 
 // Lists all tags.
-func (s *TagsService) ListAll() (*ListAllResponse, *Response, error) {
-	u := "tags"
+func (s *TagsService) ListAll(limit int) (*ListAllResponse, *Response, error) {
+	u := fmt.Sprintf("tags?limit=%d", limit)
 	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err

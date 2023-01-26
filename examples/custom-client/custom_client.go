@@ -26,7 +26,7 @@ func main() {
 		panic(err)
 	}
 
-	_, _, err = a.Tags.ListAll()
+	_, _, err = a.Tags.ListAll(100)
 	if err != nil {
 		panic(err)
 	}
