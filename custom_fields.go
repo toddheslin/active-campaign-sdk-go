@@ -1,6 +1,9 @@
 package active_campaign
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
 
 // CustomFieldsService handles communication with custom field related
 // methods of the Active Campaign API.
@@ -90,8 +93,8 @@ func (s *CustomFieldsService) Retrieve(id string) (*CustomFieldResponse, *Respon
 }
 
 // Lists all tags.
-func (s *CustomFieldsService) ListAll() (*CustomFieldsListAllResponse, *Response, error) {
-	u := "fields"
+func (s *CustomFieldsService) ListAll(limit int) (*CustomFieldsListAllResponse, *Response, error) {
+	u := fmt.Sprintf("fields?limit=%d", limit)
 	req, err := s.client.NewRequest(http.MethodGet, u, nil)
 	if err != nil {
 		return nil, nil, err
