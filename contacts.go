@@ -32,7 +32,7 @@ type CreatedContact struct {
 	Email       string        `json:"email"`
 	Cdate       string        `json:"cdate"`
 	Udate       string        `json:"udate"`
-	Orgid       string        `json:"orgid"`
+	Orgid       interface{}   `json:"orgid"`
 	FieldValues []FieldValues `json:"fieldValues"`
 	Links       struct {
 		BounceLogs         string `json:"bounceLogs"`
