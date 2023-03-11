@@ -59,7 +59,7 @@ type CreateCustomFieldValueResponse struct {
 		UpdatedTimestamp    string        `json:"updated_timestamp"`
 		CreatedBy           string        `json:"created_by"`
 		UpdatedBy           string        `json:"updated_by"`
-		EmailEmpty          bool          `json:"email_empty"`
+		EmailEmpty          interface{}   `json:"email_empty"`
 		AccountContacts     []interface{} `json:"accountContacts"`
 		Links               struct {
 			BounceLogs            string `json:"bounceLogs"`
