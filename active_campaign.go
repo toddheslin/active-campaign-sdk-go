@@ -40,6 +40,7 @@ type Client struct {
 	Tags         *TagsService
 	CustomFields *CustomFieldsService
 	Lists        *ListsService
+	Imports      *ImportsService
 }
 
 type service struct {
@@ -111,6 +112,7 @@ func NewClient(opts *ClientOpts) (*Client, error) {
 	c.Tags = (*TagsService)(&c.common)
 	c.CustomFields = (*CustomFieldsService)(&c.common)
 	c.Lists = (*ListsService)(&c.common)
+	c.Imports = (*ImportsService)(&c.common)
 
 	return c, nil
 }
