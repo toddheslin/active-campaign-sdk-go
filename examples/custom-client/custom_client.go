@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	ac "github.com/chrisjoyce911/active-campaign-sdk-go"
+	ac "github.com/toddheslin/active-campaign-sdk-go"
 )
 
 // If you'd like, you can build your httpClient and avoid passing your token through this package entirely.

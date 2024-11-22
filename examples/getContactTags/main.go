@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	ac "github.com/chrisjoyce911/active-campaign-sdk-go"
+	ac "github.com/toddheslin/active-campaign-sdk-go"
 )
 
 func main() {
